@@ -1,0 +1,10 @@
+.black-sq {
+    margin: 10px;
+    display: flex;
+    height: 100px;
+    width: 100px;
+    background-color: black;
+    color: red;
+    justify-content: center;
+    align-items: center;
+}
