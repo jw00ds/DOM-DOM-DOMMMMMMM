@@ -35,21 +35,21 @@ function createBlackSq() {
     });
     blackSq.addEventListener("dblclick", function (e) {
         if (e.target.id % 2 == 0) {
-            e.target.nextSibling.style.display = "none";//could also do this via e.target.nextSibling.style.display = "none";
-            console.error("NO SQUARES AFTER THIS ONE, YA DOOFUS!")
-        } else if (isOdd(e.target.id)) {
-            e.target.previousSibling.style.display = "none";
-            console.error("NO SQUARES BEFORE THIS ONE, YA TURKEY!")
+            // ^Its ID is an even number
+            if (e.target.nextSibling === null) {
+                console.error("NO SQUARES AFTER THIS ONE, YA DOOFUS!");
+            } else {
+                containerDiv.removeChild(e.target.nextSibling);
+            }
+        } else {
+            // ^Its ID is an odd number
+            if (e.target.previousSibling === null) {
+                console.error("NO SQUARES BEFORE THIS ONE, YA TURKEY!");
+            } else {
+                containerDiv.removeChild(e.target.previousSibling);
+            }
         }
     });
-}
-
-function isOdd(value) {
-    if (value % 2 == 0) {
-        return false;
-    } else {
-        return true;
-    }
 }
 
 let idCounter = -1;
@@ -69,6 +69,22 @@ function randomColorIdxPositionGenerator() {
     return Math.floor(Math.random() * colors.length);
 }
 
-//When hovering over a square, the value of the square's id should display centered in the square, and disappear when the cursor is no longer over the square
+// function isOdd(value) {
+//     if (value % 2 == 0) {
+//         return false;
+//     } else {
+//         return true;
+//     }
+// }//JW NOTE TO SELF:  This one made usefulness of parameter(s) in fns click in brain, but wasn't necessary when implemented else{} stmt above
 
-//Google previousSibling & nextSibling
+// blackSq.addEventListener("dblclick", function (e) {
+//     if (e.target.id % 2 == 0 && e.target.nextSibling === null) {
+//         console.error("NO SQUARES AFTER THIS ONE, YA DOOFUS!");
+//     } else if (isOdd(e.target.id) && e.target.previousSibling === null) {
+//         console.error("NO SQUARES BEFORE THIS ONE, YA TURKEY!");
+//     }
+//     if (e.target.id % 2 == 0) {
+//         containerDiv.removeChild(e.target.nextSibling);
+//     } else if (isOdd(e.target.id)) {
+//         containerDiv.removeChild(e.target.previousSibling);
+//     }
